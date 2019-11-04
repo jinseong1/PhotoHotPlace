@@ -76,6 +76,7 @@
 	  aJaxdata.phoneNumber  = phoneNumber;
 	  aJaxdata.profilePhoto = profilePhoto;
 	  
+	  /*
 	  if(id == ''){
 		  alert('아이디를 입력하여주세요.');
 		  return;
@@ -120,7 +121,8 @@
            alert('전화번호는 최대 15자리 입니다.'); 
            return;
       }
-
+      */
+      
       $.ajax({
           url:"/login/singUp",
           data:aJaxdata,
@@ -129,8 +131,9 @@
           success:function(key){
               console.log(key);
           },
-          error: function (request, status, error){                
-              alert('에러가 발생하였습니다. 관리자에게 문의 바랍니다.');
+          error: function (request, status, error){
+              alert('에러가 발생하였습니다. 관리자에게 문의 바랍니다. \r\n'+error);
+             
           }
       }); 
 	  

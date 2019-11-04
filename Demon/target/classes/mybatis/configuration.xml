@@ -11,9 +11,7 @@
     
     <!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑) 정보 설정 -->   
     <mappers>
-        <!-- 
-        <mapper resource="mybatis/Comment.xml" />
-         -->
+        <mapper resource="mapper/Login.xml" />
     </mappers>
     
 </configuration>

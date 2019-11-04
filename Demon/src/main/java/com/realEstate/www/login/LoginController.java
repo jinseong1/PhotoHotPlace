@@ -10,17 +10,26 @@ import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.realEstate.www.login.service.impl.LoginService;
+import com.realEstate.www.login.service.impl.LoginServiceImpl;
 
 @Controller
 @RequestMapping("/login") 
 public class LoginController {
+	
+	@Autowired
+	LoginService loginService;
+	
 	
 	//특정 글번호에 대한 코멘트 전체 목록 가져오기
 	@ResponseBody
@@ -43,20 +52,16 @@ public class LoginController {
 	//특정 글번호에 대한 코멘트 전체 목록 가져오기
 	@ResponseBody
 	@RequestMapping(value="/singUp",produces="text/html; charset=UTF-8", method = RequestMethod.POST)
-	public String singUp(@RequestParam MultipartHttpServletRequest request) throws Exception{
+	public String singUp(@RequestParam Map map) throws Exception{
 		
-		System.out.println(request.getAttribute("name"));
-		
-		System.out.println(request.getParameter("id"));
-		
-		request.getAttribute("name");
-		
-		List a = new ArrayList();
+		//loginService.singup(map);
+		loginService.selectSingUpMember();
 		
 		
-		
-		return JSONArray.toJSONString(a);
+		return null;
 	}
+	
+	
 	
 	//생년월일에 사용할 날짜 얻
 	@ResponseBody
