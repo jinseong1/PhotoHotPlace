@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.Login">
+
+
+
+
+    <insert id="singup" parameterType="map">
+        INSERT INTO CUSTOMS 
+        VALUES
+        (
+        #{id},
+        #{pwd},
+        #{name}
+        )
+    </insert>
+    
+    
+    <select id="selectSingUpMember" parameterType="map" resultType="hashmap">
+       SELECT * FROM CUSTOMS WHERE C_ID = #{id}
+    </select>
+    
+
+</mapper>
