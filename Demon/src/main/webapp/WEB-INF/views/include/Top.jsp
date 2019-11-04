@@ -13,7 +13,7 @@
         <span class="icon-bar"></span>
       </button>
       <!-- Brand Name start -->
-      <a class="navbar-brand" href="/">PhotoHotPlace</a>
+      <a class="navbar-brand" href="/">포토 핫플</a>
       <!-- Brand Name end -->
     </div>
 

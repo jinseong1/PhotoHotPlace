@@ -2,28 +2,26 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
-   
-   <!-- DataBase 연결 -->
-   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.mariadb.jdbc.Driver"></property>
-        <property name="url" value="jdbc:mysql://database-1.cdkqtvrfdp5i.ap-northeast-2.rds.amazonaws.com:3306/photo_place"></property>
-        <property name="username" value="admin"></property>
-        <property name="password" value="asdfghjkl"></property>
-   </bean>
-    
-    
-     <!-- 마이바티스 지원을 위한 빈 등록 -->    
-     <!--  1]SqlSessionFactory -->
-     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <!-- 데이타소스:데이타베이스 연결정보 -->
-        <property name="dataSource" ref="dataSource"/>
-        <!-- 환경설정 파일 위치 설정 -->
-        <property name="configLocation" value="classpath:mybatis/configuration.xml"/>
-     </bean>
-    <!-- 2]SqlSessionTemplate -->
-    <bean id="template" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg ref="sqlSessionFactory"/>
-    </bean>
+
+	<!-- DataBase 연결 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://database-1.cdkqtvrfdp5i.ap-northeast-2.rds.amazonaws.com:3306/photo_place"></property>
+		<property name="username" value="admin"></property>
+		<property name="password" value="asdfghjkl"></property>
+	</bean>
+
+	<!-- 1]SqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 데이타소스:데이타베이스 연결정보 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 환경설정 파일 위치 설정 -->
+		<property name="configLocation" value="classpath:mybatis/configuration.xml" />
+	</bean>
+	<!-- 2]SqlSessionTemplate -->
+	<bean id="template" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
    
    
    

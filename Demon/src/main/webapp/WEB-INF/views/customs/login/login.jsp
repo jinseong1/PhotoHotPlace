@@ -11,6 +11,19 @@
   </head>
   <script type="text/javascript">
   
+  $(document).ready(function() {
+	  $("#customsId").keydown(function(key) {
+		  if (key.keyCode == 13) {
+			  actionLogin();
+		  }
+	  });
+      $("#customsPwd").keydown(function(key) {
+          if (key.keyCode == 13) {
+        	  actionLogin();
+          }
+      });	  
+  });
+  
   function actionLogin(){
 	  
       var jsonData = {}
@@ -58,14 +71,15 @@
   </script>
 <body>
 	<div>
+	    <br/><br/><br/>
 	    <div class="container" style="width:500px;">
 			<form accept-charset="UTF-8" method="post">
 				<div class="form-group">
-					<label for="exampleInputEmail1" style="text-align: left;">아이디</label>
+					<label for="exampleInputEmail1" style="text-align: left;" onkeyup="enterkey();">아이디</label>
 					<input type="email" class="form-control" id="customsId" name="customsId" placeholder="아이디를 입력하여주세요.">
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1" style="text-align: left;">비밀번호</label>
+					<label for="exampleInputPassword1" style="text-align: left;" onkeyup="enterkey();">비밀번호</label>
 					<input type="password" class="form-control" id="customsPwd" name="customsPwd" placeholder="비밀번호를 입력하여 주세요.">
 				</div>
 				<input type="button" style="width: 100%;height: 60px;" onclick="javascript:actionLogin()" value="로그인" />
@@ -82,6 +96,7 @@
 			</div>
 		</div>
 		<div>&nbsp;&nbsp;</div>
+		<br/><br/><br/><br/><br/><br/><br/>
 	</div>
 </body>
 <%@include file = "/WEB-INF/views/include/Footer.jsp"%>

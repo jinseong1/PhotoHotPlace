@@ -28,6 +28,11 @@ public class MovingWeb {
 		return "/photo/photoDetail";
 	}	
 	
+	@RequestMapping("/photoWrite")
+	public String photoWrite(@RequestParam Map<String,Object> map ,Model model) {
+		return "/photo/photoWrite";
+	}		
+	
 	@RequestMapping("/login" )
 	public String loginPageMoving(@RequestParam Map<String,Object> map ,Model model) {
 		return "/customs/login/login";

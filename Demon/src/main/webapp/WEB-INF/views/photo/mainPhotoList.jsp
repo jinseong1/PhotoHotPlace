@@ -130,7 +130,7 @@
     	  // The marker, positioned at Uluru
     	  var marker;
     	  
-    	  var locations = [ 
+    	  var locations = [
 		      ['명동', 37.563576, 126.983431],
 		      ['가로수길', 37.520300, 127.023008],
 		      ['광화문', 37.575268, 126.976896],

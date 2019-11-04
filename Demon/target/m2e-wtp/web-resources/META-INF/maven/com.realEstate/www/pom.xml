@@ -40,6 +40,12 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>	
 		
+		
+        <dependency>
+	        <groupId>org.lazyluke</groupId>
+	        <artifactId>log4jdbc-remix</artifactId>
+	        <version>0.2.7</version>
+        </dependency>		
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -109,33 +115,6 @@
 			<version>1.2</version>
 		</dependency>
 	
-
-        <!-- @Inject -->
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
-        </dependency>
-                
-        <!-- Servlet -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
-    
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>

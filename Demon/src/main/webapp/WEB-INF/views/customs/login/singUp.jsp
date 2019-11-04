@@ -63,10 +63,22 @@
 	  var dateOfBirth  = trim($('#dateOfBirthYear').val())+trim($('#dateOfBirthMonth').val())+trim($('#dateOfBirthDay').val());
 	  var nationNo     = trim($('#nationNo').val());
 	  var phoneNumber  = trim($('#phoneNumber').val());
-	  var profilePhoto = trim($('#profilePhoto')[0].files[0]);
 	  var imgConfirm   = trim($('#profilePhoto').val());
 	  imgConfirm       = imgConfirm.substring(imgConfirm.length-3,imgConfirm.length);
+
+	  var formData = new FormData();
+	  var profilePhoto = document.getElementById("profilePhoto");
+	  var files = profilePhoto.files; //업로드한 파일들의 정보를 넣는다.
+      
+	  if(files.length > 1){
+		  alert('사진은 하나만 업로드 가능합니다.');
+		  return;
+	  }
 	  
+      for (var i = 0; i < files.length; i++) {
+          formData.append('file-'+i, files[i]); //업로드한 파일을 하나하나 읽어서 FormData 안에 넣는다.
+      }
+
 	  var aJaxdata = {};
 	  
 	  aJaxdata.id           = id;
@@ -80,7 +92,6 @@
 	  aJaxdata.gender       = gender;
 	  aJaxdata.phoneNumber_c= nationNo; 
 	  aJaxdata.phoneNumber  = phoneNumber;
-	  aJaxdata.profilePhoto = profilePhoto;
 	  
 	  if(id == ''){
 		  alert('아이디를 입력하여주세요.');
@@ -133,25 +144,43 @@
           dataType:'text',
           type:'post',
           success:function(data){
-
               if(data == 0){
             	  alert('이미 가입되어 있는 아이디입니다.');
               } else {
-            	  alert('가입이 완료되었습니다. 로그인해주시기 바랍니다.');
-            	  location.href = '/';
+            	  if(formData != null){
+            	  
+	                  $.ajax({
+	                      type: "post",
+	                      url: "/login/profileSave",
+	                      data:formData,
+	                      dataType: 'text', 
+	                      processData: false, 
+	                      contentType: false,
+	                      success: function (data) {
+	                    	  alert('가입이 완료되었습니다.');
+	                          location.href = '/';
+	                      },
+	                      error: function (e) {
+	                    	  alert('프로필 사진 업로드 중 에러가 발생하였습니다. \r\n 관리자에게 문의 바랍니다.');
+	                      }
+	                  });
+                  
+            	  } else{
+                      alert('가입이 완료되었습니다.');
+                      location.href = '/';
+            	  }
+            	  
               }
-              
           },
           error: function (request, status, error){
               alert('에러가 발생하였습니다. 관리자에게 문의 바랍니다. \r\n 에러메세지 : '+error);
-             
           }
       }); 
   }
   </script>
 <body>
 	<%@include file="/WEB-INF/views/include/Top.jsp"%>
-	<form>
+	<form >
 		<div class="container" style="width:500px;">
 			<div class="form-group">
 				<label for="exampleInputEmail1">아이디</label>
@@ -190,8 +219,8 @@
 			<div class="form-group">
 				<label for="exampleInputEmail1">성별</label>
 				<select class="form-control" id="gender" name="gender">
-					<option value="man">남자</option>
-					<option value="womon">여자</option>
+					<option value="M">남자</option>
+					<option value="W">여자</option>
 				</select>
 			</div>
             <div class="form-group">
@@ -416,7 +445,7 @@
             </div>			
 			<div class="form-group">
 				<label for="exampleInputFile">파일 업로드</label>
-				<input type="file" id="profilePhoto">
+				<input type="file" multiple="multiple" id="profilePhoto" name="profilePhoto">
 				<p class="help-block">프로필 사진에 사용할 사진을 업로드하여주세요.</p>
 			</div>
 			<input type="button" style="width: 100%;height: 60px;" value="가입하기" onclick="javascript:singUp()">
