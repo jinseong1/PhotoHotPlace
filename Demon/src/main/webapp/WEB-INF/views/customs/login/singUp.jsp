@@ -30,7 +30,7 @@
             	  $('#dateOfBirthYear').html(dt.year);
             	  $('#dateOfBirthMonth').html(dt.month);
             	  $('#dateOfBirthDay').html(dt.day);
-            	  $('#adressContry').html(dt.contry)
+            	  $('#addressContry').html(dt.contry)
             	  
               },
               error: function (request, status, error){                
@@ -55,9 +55,12 @@
 	  var id           = trim($('#id').val());
 	  var pwd          = trim($('#pwd').val());
 	  var pwdConfirm   = trim($('#pwdConfirm').val());
-	  var name         = trim($('#name').val());  
+	  var name         = trim($('#name').val()); 
+	  var address_c    = trim($('#addressContry').val()); 
+	  var address_m    = trim($('#addressM').val()); 
+	  var address_d    = trim($('#addressD').val()); 
 	  var gender       = trim($('#gender').val());
-	  var dateOfBirth  = trim($('#dateOfBirth').val());
+	  var dateOfBirth  = trim($('#dateOfBirthYear').val())+trim($('#dateOfBirthMonth').val())+trim($('#dateOfBirthDay').val());
 	  var nationNo     = trim($('#nationNo').val());
 	  var phoneNumber  = trim($('#phoneNumber').val());
 	  var profilePhoto = trim($('#profilePhoto')[0].files[0]);
@@ -70,13 +73,15 @@
 	  aJaxdata.pwd          = pwd;
 	  aJaxdata.pwdConfirm   = pwdConfirm;
 	  aJaxdata.name         = name;
-	  aJaxdata.gender       = gender;
+	  aJaxdata.address_c    = address_c; 
+	  aJaxdata.address_m    = address_m;
+	  aJaxdata.address_d    = address_d;
 	  aJaxdata.dateOfBirth  = dateOfBirth;
-	  aJaxdata.nationNo     = nationNo;
+	  aJaxdata.gender       = gender;
+	  aJaxdata.phoneNumber_c= nationNo; 
 	  aJaxdata.phoneNumber  = phoneNumber;
 	  aJaxdata.profilePhoto = profilePhoto;
 	  
-	  /*
 	  if(id == ''){
 		  alert('아이디를 입력하여주세요.');
 		  return;
@@ -121,22 +126,27 @@
            alert('전화번호는 최대 15자리 입니다.'); 
            return;
       }
-      */
       
       $.ajax({
           url:"/login/singUp",
           data:aJaxdata,
           dataType:'text',
           type:'post',
-          success:function(key){
-              console.log(key);
+          success:function(data){
+
+              if(data == 0){
+            	  alert('이미 가입되어 있는 아이디입니다.');
+              } else {
+            	  alert('가입이 완료되었습니다. 로그인해주시기 바랍니다.');
+            	  location.href = '/';
+              }
+              
           },
           error: function (request, status, error){
-              alert('에러가 발생하였습니다. 관리자에게 문의 바랍니다. \r\n'+error);
+              alert('에러가 발생하였습니다. 관리자에게 문의 바랍니다. \r\n 에러메세지 : '+error);
              
           }
       }); 
-	  
   }
   </script>
 <body>
@@ -161,10 +171,10 @@
 			</div>
             <div class="form-group">
                 <label for="exampleInputEmail1">주소</label>
-                <select class="form-control" id="adressContry"  name="adressContry">
+                <select class="form-control" id="addressContry"  name="adressContry">
                 </select>
-                <input type="text" class="form-control" id="adressM" name="adressM" style="margin-top: 7px;" placeholder="주소를 입력하여 주세요.">
-                <input type="text" class="form-control" id="adressD" name="adressD" style="margin-top: 7px;" placeholder="상세주소를 입력하여 주세요.">
+                <input type="text" class="form-control" id="addressM" name="adressM" style="margin-top: 7px;" placeholder="주소를 입력하여 주세요.">
+                <input type="text" class="form-control" id="addressD" name="adressD" style="margin-top: 7px;" placeholder="상세주소를 입력하여 주세요.">
             </div>
 			<div class="form-group">
 				<label for="exampleInputEmail1">생년월일</label>

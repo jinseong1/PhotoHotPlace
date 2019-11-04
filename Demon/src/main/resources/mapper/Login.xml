@@ -2,22 +2,96 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.Login">
 
-
-
-
     <insert id="singup" parameterType="map">
-        INSERT INTO CUSTOMS 
+        INSERT INTO CUSTOMS
+        (
+         <if test="id != null and id != ''">
+         C_ID,
+         </if>
+         <if test="pwd != null and pwd != ''">
+         C_PWD,
+         </if>
+         <if test="name != null and name != ''">
+         C_NAME,
+         </if>
+         <if test="address_c != null and address_c != ''">
+         C_ADDRESS_C,
+         </if>
+         <if test="address_m != null and address_m != ''">
+         C_ADDRESS_M,
+         </if>
+         <if test="address_d != null and address_d != ''">
+         C_ADDRESS_D,
+         </if>
+         <if test="dateOfBirth != null and dateOfBirth != ''">
+         C_DATE_OF_BIRTH,
+         </if>
+         <if test="gender != null and gender != ''">
+         C_GENDER,
+         </if>
+         <if test="phoneNumber_c != null and phoneNumber_c != ''">
+         C_PHONE_NUMBER_C,
+         </if>
+         <if test="phoneNumber != null and phoneNumber != ''">
+         C_PHONE_NUMBER,
+         </if>
+         <if test="profilePhoto != null and profilePhoto != ''">
+         C_PROFILE_M,
+         </if>
+         CREDIT_TIME_YMD,
+         CREDIT_TIME_HMS
+        )
         VALUES
         (
-        #{id},
-        #{pwd},
-        #{name}
+         <if test="id != null and id != ''">
+         #{id},
+         </if>
+         <if test="pwd != null and pwd != ''">
+         #{pwd},
+         </if>
+         <if test="name != null and name != ''">
+         #{name},
+         </if>
+         <if test="address_c != null and address_c != ''">
+         #{address_c},
+         </if>
+         <if test="address_m != null and address_m != ''">
+         #{address_m},
+         </if>
+         <if test="address_d != null and address_d != ''">
+         #{address_d},
+         </if>
+         <if test="dateOfBirth != null and dateOfBirth != ''">
+         #{dateOfBirth},
+         </if>
+         <if test="gender != null and gender != ''">
+         #{gender},
+         </if>
+         <if test="phoneNumber_c != null and phoneNumber_c != ''">
+         #{phoneNumber_c},
+         </if>
+         <if test="phoneNumber != null and phoneNumber != ''">
+         #{phoneNumber},
+         </if>
+         <if test="profilePhoto != null and profilePhoto != ''">
+         #{profilePhoto},
+         </if>
+         (SELECT DATE_FORMAT(NOW(), '%Y%m%d')),
+         (SELECT DATE_FORMAT(NOW(), '%H%i%S'))
         )
     </insert>
     
     
-    <select id="selectSingUpMember" parameterType="map" resultType="hashmap">
-       SELECT * FROM CUSTOMS WHERE C_ID = #{id}
+    <select id="selectCustoms" parameterType="map" resultType="Integer">
+       SELECT    COUNT(*) 
+       FROM      CUSTOMS 
+       WHERE     1=1
+       <if test="id != null and id != ''">
+       AND       C_ID = #{id}
+       </if>
+       <if test="pwd != null and pwd != ''">
+       AND       C_PWD = #{pwd}
+       </if>
     </select>
     
 

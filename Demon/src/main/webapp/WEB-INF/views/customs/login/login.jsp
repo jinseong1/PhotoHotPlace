@@ -15,13 +15,13 @@
 	  
       var jsonData = {}
       
-      jsonData.customsId  = $('#customsId').val();
-      jsonData.customsPwd = $('#customsPwd').val();
+      jsonData.id  = $('#customsId').val();
+      jsonData.pwd = $('#customsPwd').val();
       
-      if($.trim(jsonData.customsId) == ''){
+      if($.trim(jsonData.id) == ''){
           alert('이메일을 입력하여주세요.');
     	  return;
-      } else if($.trim(jsonData.customsPwd) == ''){
+      } else if($.trim(jsonData.pwd) == ''){
     	  alert('비밀번호를 입력하여주세요.');
     	  return;
       }
@@ -32,7 +32,11 @@
           dataType:'json',
           type:'post',
           success:function(data){
-              
+              if(data == 0){
+            	  alert('아이디나 비밀번호를 잘못 입력하셨습니다.');
+              } else{
+            	  location.href = '/';
+              }
           },
           error: function (request, status, error){
               alert('에러가 발생하였습니다. 관리자에게 문의 바랍니다.');

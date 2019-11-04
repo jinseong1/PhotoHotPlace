@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
+
 <!-- Top source Start -->
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -20,9 +24,18 @@
         <li><a href="#">Link</a></li>
         <li><a href="#">Link</a></li>
      </ul>
-     <a href="javascript:loginPageMove()">
-    <button type="button" style="float: right;" class="btn btn-default navbar-btn">Sign in</button>
+     <% 
+        if((String)session.getAttribute("C_ID") != null){
+     %> 
+    <a href="javascript:logout()">
+     <button type="button" style="float: right;" class="btn btn-default navbar-btn">Log Out</button>
     </a>
+     <% } else {%>
+    <a href="javascript:loginPageMove()">
+     <button type="button" style="float: right;" class="btn btn-default navbar-btn">Sign in</button>
+    </a>
+    <%} %>
+     
     </div>
   </div>
 </nav>

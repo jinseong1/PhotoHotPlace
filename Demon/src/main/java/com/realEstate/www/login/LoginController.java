@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,34 +34,44 @@ public class LoginController {
 	LoginService loginService;
 	
 	
-	//특정 글번호에 대한 코멘트 전체 목록 가져오기
+	/**
+	 * 2019-11-04 박진성 
+	 * 로그인 처리 
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
 	@ResponseBody
 	@RequestMapping(value="/customsLogin",produces="text/html; charset=UTF-8", method = RequestMethod.POST)
-	public String getSearchList(@RequestParam Map<String, String> map) throws Exception{
-				
-		System.out.println(map.get("customsId").toString());
-		System.out.println(map.get("customsPwd").toString());
+	public String getSearchList(@RequestParam Map<String, String> map, HttpServletRequest request) throws Exception{
 		
-		List<Map> comments= new ArrayList<Map>();
+		HttpSession session = request.getSession();
 		
-		map.put("data1", "1");
-		map.put("data2", "2");
+		int result = loginService.login(map);
 		
-		comments.add(map);
+		if(result > 0) {
+			session.setAttribute("C_ID", map.get("id").toString());
+		} else {
+			session.invalidate();
+		}
 		
-		return JSONArray.toJSONString(comments);
+		return String.valueOf(result);
 	}
 	
-	//특정 글번호에 대한 코멘트 전체 목록 가져오기
+	/**
+	 * 2019-11-04 박진성 
+	 * 가입 처리 
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
 	@ResponseBody
 	@RequestMapping(value="/singUp",produces="text/html; charset=UTF-8", method = RequestMethod.POST)
 	public String singUp(@RequestParam Map map) throws Exception{
 		
-		//loginService.singup(map);
-		loginService.selectSingUpMember();
+		int result = loginService.singup(map);
 		
-		
-		return null;
+		return String.valueOf(result);
 	}
 	
 	

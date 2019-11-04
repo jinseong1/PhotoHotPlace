@@ -18,20 +18,27 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public int singup(Map map) {
 		
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		return commonDAO.insert("mapper.Login.singup", map);
+		int cnt = commonDAO.selectOne("mapper.Login.selectCustoms", map);
+		if(cnt == 0) {
+			cnt = commonDAO.insert("mapper.Login.singup", map);
+		}else {
+			cnt = 0;
+		}
+		
+		return cnt;
 	}
 
 	@Override
 	public List<Map> selectSingUpMember() {
 		
 		Map map = new HashMap();
-		
-		map.put("id", "a");
-		
-		System.out.println("!@@@@!@!@!@!@!");
-		
+
 		return commonDAO.selectList("mapper.Login.selectSingUpMember", map);
+	}
+
+	@Override
+	public int login(Map map) {
+		return commonDAO.selectOne("mapper.Login.selectCustoms", map);
 	}
 	
  
